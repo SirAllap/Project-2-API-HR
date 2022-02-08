@@ -64,8 +64,9 @@ POST   | /auth/check      | YES   | Auth Token check         | -                
 
 METHOD | ENDPOINT    | TOKEN |       ROLE      | DESCRIPTION      | POST PARAMS                                     | RETURNS
 -------|-------------|-------|-----------------|------------------|-------------------------------------------------|--------------------
-GET    | /profile    | YES   |Manager/Recruter | View own profile | -                                               | name, surname, email, phone
-
+GET    | /profile    | YES   | Manager/Recruter| View own profile | -                                               | name, surname, email, phone
+PUT    | /profile    | YES   | Admin/Candidate |Update own user profile  | email, name, phone, skills, experience, password| Updated user data
+DELETE | /profile    | YES   | Admin/Candidate |Deletes own user account | password                                        | User deletion confirmation
 
 
 
