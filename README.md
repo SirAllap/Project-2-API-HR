@@ -50,35 +50,33 @@ The API is made up of 5 different types of users:
 
 
 
-### Authentication Endpoints
-
 The Authentication flow for the application is:
 
-users/create. by admin
+### Users Endpoints (users/create. by admin)
+                  
+METHOD | ENDPOINT         | TOKEN | ROLE    | DESCRIPTION              | POST PARAMS                                                     | RETURNS
+-------|------------------|-------|---------|--------------------------|-----------------------------------------------------------------|--------------------
+POST   | /users/create    | YES   |  Admin  | Create user account      | name, surname, email, phone, password                           | User created comfirmation
+DELETE | /users/:userId   | YES   |  Admin  | Deletes user account     | password                                                        | User deletion confirmation
+PUT    | /users/:userId   | YES   |  Admin  | Update profile           | email, name, phone, password ( candidate: + skills, experience) | Updated user data
+
+
+### Authentication Endpoints
 
 METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
 POST   | /auth/signup     | -     | User Signup              | name, surname, email, phone, password           | token
 POST   | /auth/login      | -     | User Login               | email, password                                 | token
-POST   | /auth/check      | YES   | Auth Token check         | -                                               |
+POST   | /auth/check      | YES   | Auth Token check         | -                                               | -
 
 
 ### Profile Endpoints
 
-METHOD | ENDPOINT         | TOKEN | ROLE              | DESCRIPTION              | POST PARAMS                   | RETURNS
--------|------------------|-------|-------------------|--------------------------|-------------------------------|--------------------
-GET    | /profile         | YES   | Manager/Recruiter | View own profile         | -                             | name, surname, email, phone
-PUT    | /profile         | YES   |       Admin       | Update profile           | email, name, phone, password  | Updated user data
-DELETE | /profile         | YES   |       Admin       | Deletes user account     | password                      | User deletion confirmation
-
-
-### Profile Endpoints
-
-METHOD | ENDPOINT         | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|-----------|--------------------------|-------------------------------------------------|--------------------
-GET    | /profile         | YES   | Candidate | View own profile         | -                                               | name, surname, email, phone, skills, experience
-PUT    | /profile         | YES   | Candidate | Update profile           | email, name, phone, skills, experience, password| Updated user data
-DELETE | /profile         | YES   | Candidate | Deletes user account     | password                                        | User deletion confirmation
+METHOD | ENDPOINT         | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                                      | RETURNS
+-------|------------------|-------|-----------|--------------------------|--------------------------------------------------|--------------------
+GET    | user/profile     | YES   | All       | View own profile         | -                                                | name, surname, email, phone ( candidate: + skills, experience)
+PUT    | user/profile     | YES   | Candidate | Update profile           | email, name, phone, skills, experience, password | Updated user data
+DELETE | user/profile     | YES   | Candidate | Deletes user account     | password                                         | User deletion confirmation
 
 
 ### Candidate Endpoints
@@ -86,18 +84,17 @@ DELETE | /profile         | YES   | Candidate | Deletes user account     | passw
 METHOD | ENDPOINT            | TOKEN | ROLE                  | DESCRIPTION                  | PARAMS               | RETURNS
 -------|---------------------|-------|-----------------------|------------------------------|----------------------|-----------------
 GET    | /candidates         |  YES  | Manager, Recruiter    | Get a list of all candidates | query: search string | List of matching names, surnames and ids
-GET    | /candidates/:userId |  YES  | Manager, Recruiter    | Get candidate profile        | userId               | name, surname, email, phone, skills, expereince, requisitions
- 
+GET    | /candidates/:userId |  YES  | Manager, Recruiter    | Get candidate profile        | -                    | name, surname, email, phone, skills, expereince, requisitions
+
 
 ### JobOffer Endpoints
 
-METHOD | ENDPOINT           | TOKEN | ROLE          |  DESCRIPTION        | PARAMS                                          | RETURNS
--------|--------------------|-------|---------------|---------------------|-------------------------------------------------|--------------------
-POST   | /JobOffer          | YES   | Admin/Manager | Post a job offer    | tittle, postDate, company, description, skills  | Updated post offer
-GET    | /JobOffer          | NO    | All users     | Get all jobs offers | query: search string                            | Lits of matching tittle, company, postDate and ids
-GET    | /JobOffer/:jobId   | NO    | All users     | Get full job offer  | jobId                                           | tittle, postDate, company, description, skills 
-POST   | /JobOffer/apply    | YES   | Candidate     | Apply candidate ID  | ??????????????                                  | ?????????????
-
+METHOD | ENDPOINT                         | TOKEN | ROLE          |  DESCRIPTION        | PARAMS                                          | RETURNS
+-------|----------------------------------|-------|---------------|---------------------|-------------------------------------------------|--------------------
+POST   | /job-offer                       | YES   | Admin/Manager | Post a job offer    | tittle, postDate, company, description, skills  | Updated post offer
+GET    | /job-offer                       | NO    | All users     | Get all jobs offers | query: search string                            | Lits of matching tittle, company, postDate and ids
+GET    | /job-offer/:jobId                | NO    | All users     | Get full job offer  | -                                               | tittle, postDate, company, description, skills 
+POST   | /job-offer/:jobId/requisitions   | YES   | Candidate     | Apply candidate ID  | -                                               | Requisiton
 
 
 ### ¿Ola ke ase?
