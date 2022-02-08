@@ -4,6 +4,51 @@
 
 All API Request must be prepended with /api
 
+Our API helps companies hire developers tailored to a specific need.
+
+The API is made up of 4 different types of users:
+
+- Company/Client
+-manager
+- Recruiter
+- Candidates
+
+In addition, there would be an administrator, his main function would be to register/unregister the account of the Managers and Recruiters.
+
+Consulting (overview):
+1.- The client has a need that he "can" transmit to us through the API.
+2.- The manager gets in touch with that client to learn more about their needs and post that job offer.
+3.- The recruiter is in charge of getting potential candidates to report them to the manager.
+4.- The manager filters the list that the recruiter has given him and schedules interviews with the possible candidates.
+5.- The manager offers the client those candidates that best suit that profile (need).
+
+
+Manager:
+1.- Add/modify/delete job offers.
+2.- Assess the candidate's abilities (Hard skills and level)
+3.- Reject/add candidates to job offers.
+4.- You can move a candidate from one job offer to another.
+
+Recruiter:
+1.- See the job offers created by your Manager.
+2.- You can see all the candidates who have applied to a job offer.
+3.- Reject/add candidates to job offers.
+
+
+
+
+
+Candidate:
+1.- You can create an account.
+two-. You can update the account details.
+3.- You can see the job offers that have been published.
+4.- You can apply to job offers.
+5.- You can see the offers to which you have applied.
+
+          Client
+1.-You can register.
+2.-You can assess the developer based on the performance of the work done.
+
 
 ### Authentication Endpoints
 
