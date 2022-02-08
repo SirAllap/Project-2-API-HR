@@ -6,7 +6,7 @@ All API Request must be prepended with /api
 
 ## Our API helps companies hire developers tailored to a specific need.
 
-## The API is made up of 5 different types of users:
+The API is made up of 5 different types of users:
 
     Admin
     Manager
