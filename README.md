@@ -16,51 +16,41 @@ POST   | /auth/login      | -     | User Login               | email, password  
 POST   | /auth/check      | YES   | Auth Token check         | -                                               |
 
 
-### Manager Profile Endpoints
+### Profile Endpoints
 
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /profile         | YES   | View own profile         | -                                               | name, surname, email, phone
-
-
-### Recruiter Profile Endpoints
-
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /profile         | YES   | View own profile.        | -                                               | name, surname, email, phone
+METHOD | ENDPOINT         | TOKEN | ROLE              | DESCRIPTION              | POST PARAMS                   | RETURNS
+-------|------------------|-------|-------------------|--------------------------|-------------------------------|--------------------
+GET    | /profile         | YES   | Manager/Recruiter | View own profile         | -                             | name, surname, email, phone
+PUT    | /profile         | YES   |       Admin       | Update profile           | email, name, phone, password  | Updated user data
+DELETE | /profile         | YES   |       Admin       | Deletes user account     | password                      | User deletion confirmation
 
 
-### Cadidate Profile Endpoints
+### Profile Endpoints
 
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /profile         | YES   | View own profile.        | -                                               | name, surname, email, phone, skills, experience
-PUT    | /profile         | YES   | Update own user profile  | email, name, phone, skills, experience, password| Updated user data
-DELETE | /profile         | YES   | Deletes own user account | password                                        | User deletion confirmation
-
-
-### Manager Endpoints
-
-METHOD | ENDPOINT           | TOKEN | DESCRIPTION              | PARAMS                                          | RETURNS
--------|--------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /candidates        | YES   | Get a list of candidates | query: search string                            | List of matching names, surnames and ids
-GET    | /candidates/:canId | YES   | Get candidate profile    | canId                                           | name, surname, email, phone, skills, expereince
+METHOD | ENDPOINT         | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                                     | RETURNS
+-------|------------------|-------|-----------|--------------------------|-------------------------------------------------|--------------------
+GET    | /profile         | YES   | Candidate | View own profile         | -                                               | name, surname, email, phone, skills, experience
+PUT    | /profile         | YES   | Candidate | Update profile           | email, name, phone, skills, experience, password| Updated user data
+DELETE | /profile         | YES   | Candidate | Deletes user account     | password                                        | User deletion confirmation
 
 
-### Recruiter Endpoints
+### Candidate Endpoints
 
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | PARAMS                                          | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /candidates      | YES   | Get a list of users      | query: search string                            | List of matching usernames and ids
-GET    | /users/:userid   | YES   | Get user profile         | userid                                          | username, name, email, posts
+METHOD | ENDPOINT            | TOKEN | ROLE                  | DESCRIPTION                  | PARAMS               | RETURNS
+-------|---------------------|-------|-----------------------|------------------------------|----------------------|-----------------
+GET    | /candidates         |  YES  | Manager, Recruiter    | Get a list of all candidates | query: search string | List of matching names, surnames and ids
+GET    | /candidates/:userId |  YES  | Manager, Recruiter    | Get candidate profile        | userId               | name, surname, email, phone, skills, expereince, requisitions
+ 
+
+### JobOffer Endpoints
+
+METHOD | ENDPOINT           | TOKEN | ROLE          |  DESCRIPTION        | PARAMS                                          | RETURNS
+-------|--------------------|-------|---------------|---------------------|-------------------------------------------------|--------------------
+POST   | /JobOffer          | YES   | Admin/Manager | Post a job offer    | tittle, postDate, company, description, skills  | Updated post offer
+GET    | /JobOffer          | NO    | All users     | Get all jobs offers | query: search string                            | Lits of matching tittle, company, postDate and ids
+GET    | /JobOffer/:jobId   | NO    | All users     | Get full job offer  | jobId                                           | tittle, postDate, company, description, skills 
+POST   | /JobOffer/apply    | YES   | Candidate     | Apply candidate ID  | ??????????????                                  | ?????????????
 
 
-### Cadidate Endpoints
 
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | PARAMS                                          | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /candidates      | YES   | Get a list of users      | query: search string                            | List of matching usernames and ids
-GET    | /users/:userid   | YES   | Get user profile         | userid                                          | username, name, email, posts
-.....
-
-¿Ola ke ase?
+### ¿Ola ke ase?
