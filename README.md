@@ -6,14 +6,13 @@ All API Request must be prepended with /api
 
 Our API helps companies hire developers tailored to a specific need.
 
-The API is made up of 4 different types of users:
+The API is made up of 5 different types of users:
 
-- Company/Client
--manager
+- Admin
+- Manager
 - Recruiter
 - Candidates
-
-In addition, there would be an administrator, his main function would be to register/unregister the account of the Managers and Recruiters.
+- Client
 
 Consulting (overview):
 1.- The client has a need that he "can" transmit to us through the API.
@@ -22,9 +21,13 @@ Consulting (overview):
 4.- The manager filters the list that the recruiter has given him and schedules interviews with the possible candidates.
 5.- The manager offers the client those candidates that best suit that profile (need).
 
+Admin
+1.- Can create/delete/modify all users accounts.
+2.- Can create/delete/modify skills
+3.- Can create/delete/modify job offer
 
 Manager:
-1.- Add/modify/delete job offers.
+1.- Add/modify/delete/see job offers and requisitions.
 2.- Assess the candidate's abilities (Hard skills and level)
 3.- Reject/add candidates to job offers.
 4.- You can move a candidate from one job offer to another.
@@ -34,18 +37,14 @@ Recruiter:
 2.- You can see all the candidates who have applied to a job offer.
 3.- Reject/add candidates to job offers.
 
-
-
-
-
 Candidate:
-1.- You can create an account.
-two-. You can update the account details.
-3.- You can see the job offers that have been published.
-4.- You can apply to job offers.
-5.- You can see the offers to which you have applied.
+1.- He or she can create an account.
+2-. YHe or she update the account details.
+3.- He or she see the job offers that have been published.
+4.- He or she apply to job offers.
+5.- He or she can see the offers to which you have applied.
 
-          Client
+Customer
 1.-You can register.
 2.-You can assess the developer based on the performance of the work done.
 
@@ -61,18 +60,14 @@ POST   | /auth/login      | -     | User Login               | email, password  
 POST   | /auth/check      | YES   | Auth Token check         | -                                               |
 
 
-### Manager Profile Endpoints
+###  Profile Endpoints 
 
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /profile         | YES   | View own profile         | -                                               | name, surname, email, phone
+METHOD | ENDPOINT    | TOKEN |       ROLE      | DESCRIPTION      | POST PARAMS                                     | RETURNS
+-------|-------------|-------|-----------------|------------------|-------------------------------------------------|--------------------
+GET    | /profile    | YES   |Manager/Recruter | View own profile | -                                               | name, surname, email, phone
 
 
-### Recruiter Profile Endpoints
 
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-GET    | /profile         | YES   | View own profile.        | -                                               | name, surname, email, phone
 
 
 ### Cadidate Profile Endpoints
@@ -108,4 +103,4 @@ GET    | /candidates      | YES   | Get a list of users      | query: search str
 GET    | /users/:userid   | YES   | Get user profile         | userid                                          | username, name, email, posts
 .....
 
-¿Ola ke ase?
+
