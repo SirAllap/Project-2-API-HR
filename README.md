@@ -54,6 +54,8 @@ The API is made up of 5 different types of users:
 
 The Authentication flow for the application is:
 
+users/create. by admin
+
 METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
 POST   | /auth/signup     | -     | User Signup              | name, surname, email, phone, password           | token
