@@ -1,0 +1,29 @@
+{
+  "name": "project-2-api-hr",
+  "version": "1.0.0",
+  "description": "## API Endpoints",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jealpisa/Project-2-API-HR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jealpisa/Project-2-API-HR/issues"
+  },
+  "homepage": "https://github.com/jealpisa/Project-2-API-HR#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
+    "morgan": "^1.10.0"
+  }
+}
