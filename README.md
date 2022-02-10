@@ -56,7 +56,8 @@ The Authentication flow for the application is:
                   
 METHOD | ENDPOINT         | TOKEN | ROLE    | DESCRIPTION              | POST PARAMS                                                     | RETURNS
 -------|------------------|-------|---------|--------------------------|-----------------------------------------------------------------|--------------------
-POST   | /users/create    | YES   |  Admin  | Create user account      | name, surname, email, phone, password                           | User created comfirmation
+POST   | /users           | YES   |  Admin  | Create user account      | name, surname, email, phone, password                           | User created comfirmation
+GET    | /users           | YES   |  Admin  | Get all users accounts   | name, surname, email, phone, password                           | User created comfirmation
 DELETE | /users/:userId   | YES   |  Admin  | Deletes user account     | password                                                        | User deletion confirmation
 PUT    | /users/:userId   | YES   |  Admin  | Update profile           | email, name, phone, password ( candidate: + skills, experience) | Updated user data
 
