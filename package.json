@@ -8,15 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jealpisa/Project-2-API-HR.git"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jealpisa/Project-2-API-HR/issues"
-  },
-  "homepage": "https://github.com/jealpisa/Project-2-API-HR#readme",
+
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
