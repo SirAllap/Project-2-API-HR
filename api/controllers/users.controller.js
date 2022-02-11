@@ -31,7 +31,7 @@ async function createUser(req, res) {
 
 async function getAllUsers(req, res) {
   try {
-    const users = await UserModel.find();
+    const users = await UserModel.find({},{password: 0});
     res.status(200).json(users);
   } catch (error) {
     res.status(500).send(`Error obtaining users: ${error}`);
@@ -41,7 +41,7 @@ async function getAllUsers(req, res) {
 
 async function getOneUser(req, res) {
   try {
-    const user = await UserModel.findById(req.params.userId);
+    const user = await UserModel.findById(req.params.userId,{password: 0});
     res.status(200).json(user);
   } catch (error) {
     res.status(500).send(`Error obtaining user: ${error}`);

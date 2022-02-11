@@ -10,15 +10,10 @@ const {
     
   } = require('../controllers/users.controller')
   
-  router.post('/', authUser, authAdmin, createUser)
-  router.get('/', authUser, getAllUsers)
-  router.get('/:userId', getOneUser)
-  router.put('/:userId', updateUser)
-  router.delete('/:userId', deleteUser)
-  module.exports = router
-  
+router.post('/', authUser, authAdmin, createUser)
+router.get('/', authUser, getAllUsers)
+router.get('/:userId', authUser, getOneUser)
+router.put('/:userId', authUser, updateUser)
+router.delete('/:userId', authUser, deleteUser)
 
-/*
-var jsonData = pm.response.json();
-pm.environment.set("token", jsonData.token);
-*/
+module.exports = router
