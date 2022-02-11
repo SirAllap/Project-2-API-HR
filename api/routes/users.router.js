@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { authUser, authAdmin } = require('../utils') // Authenticated Route
+const { authUser, authAdmin, authRole } = require('../utils') // Authenticated Route
 
 const {
     createUser,
@@ -11,9 +11,9 @@ const {
   } = require('../controllers/users.controller')
   
 router.post('/', authUser, authAdmin, createUser)
-router.get('/', authUser, getAllUsers)
-router.get('/:userId', authUser, getOneUser)
-router.put('/:userId', authUser, updateUser)
-router.delete('/:userId', authUser, deleteUser)
+router.get('/', authUser, authRole, getAllUsers) // get all users candidates
+router.get('/:userId', authUser, authRole, getOneUser)
+router.put('/:userId', authUser, authAdmin, updateUser)
+router.delete('/:userId', authUser, authAdmin, deleteUser)
 
 module.exports = router
