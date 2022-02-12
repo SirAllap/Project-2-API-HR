@@ -13,29 +13,26 @@ const jobOfferSchema = new mongoose.Schema({
     type: String,
     required: [true, "Description is required"],
   },
-  // skills: [
-    // {
-      // type: mongoose.Schema.Types.ObjectId,
-      // ref: "skills",
-      // required: [true, 'Skills are required']
-    // },
-  // ],
-  // languages:
-  //   [{
-  //       language:
-  //       {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: 'laguage'
-  //       },
-  //       level:
-  //       {
-  //         type: String,
-  //         enum: ['Basic', 'Intermediate', 'Native']
-  //       }
-  //   }],
-  // requisitions: {
-  //   type: String,
-  // },
+  skills: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "skills",
+      required: [true, "Skills are required"],
+    },
+  ],
+  languages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "languages",
+      // level: {
+      //   type: String,
+      //   enum: ["Basic", "Intermediate", "Native"],
+      // },
+    },
+  ],
+  requisitions: {
+    type: String,
+  },
   workModel: {
     type: String,
     enum: ["Remote", "Hybrid", "Office"],
@@ -49,9 +46,13 @@ const jobOfferSchema = new mongoose.Schema({
     type: String,
     required: [true, "Salary is required"],
   },
-  // Category: {
-  //   type: String
-  // },
+  // Category: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "categories",
+  //     required: [true, "Categories are required"],
+  //   },
+  // ],
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",

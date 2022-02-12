@@ -26,7 +26,12 @@ async function deleteJobOffer(req, res) {
 
 async function getAllJobOffers(req, res) {
   try {
-    const jodOffers = await JobOfferModel.find(req.query);
+    const jodOffers = await JobOfferModel.find(req.query).populate([
+      {
+        path: "skills",
+        model: "skills",
+      },
+    ]);
     res.status(200).json(jodOffers);
   } catch (error) {
     res.status(500).send(`Error obtaining job offers: ${error}`);
@@ -36,14 +41,28 @@ async function getAllJobOffers(req, res) {
 
 async function getOneJobOffer(req, res) {
   try {
-    const jobOffer = await JobOfferModel.findById(req.params.jobOfferId);
+    const jobOffer = await JobOfferModel.findById(
+      req.params.jobOfferId
+    ).populate([
+      {
+        path: "skills",
+        model: "skills",
+      },
+      {
+        path: "languages",
+        model: "languages",
+      }
+    ]);
     res.status(200).json({
       Title: jobOffer.title,
       Company: jobOffer.company,
       Description: jobOffer.description,
+      Skill: jobOffer.skills,
+      Languages: jobOffer.languages,
       Work_model: jobOffer.workModel,
       Location: jobOffer.location,
       Salary: jobOffer.salary,
+      Author: jobOffer.author,
     });
   } catch (error) {
     res.status(500).send(`Error obtaining job offer: ${error}`);
@@ -54,14 +73,16 @@ async function getOneJobOffer(req, res) {
 async function updateJobOffer(req, res) {
   try {
     const jobOffer = await JobOfferModel.findByIdAndUpdate(
-      req.params.jobOfferId, 
+      req.params.jobOfferId,
       req.body,
       {
         new: true,
-        runValidator: true
+        runValidator: true,
       }
     );
-    res.status(200).json(`${jobOffer.title} post has been successfully updated`)
+    res
+      .status(200)
+      .json(`${jobOffer.title} post has been successfully updated`);
   } catch (error) {}
 }
 

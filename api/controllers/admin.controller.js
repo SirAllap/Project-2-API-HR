@@ -1,5 +1,5 @@
 const LanguagesModel = require("../models/languages.model");
-const NationalitysModel = require("../models/nationality.model");
+const NationalitiesModel = require("../models/nationality.model");
 const SkillsModel = require("../models/skills.model");
 
 async function postSkills(req, res) {
@@ -44,7 +44,7 @@ async function deleteLanguage(req, res) {
 
 async function postNationality(req, res) {
   try {
-    const nationality = await NationalitysModel.create(req.body);
+    const nationality = await NationalitiesModel.create(req.body);
     res.status(200).json(nationality);
   } catch (error) {
     res.status(500).send(`Error creating nationality: ${error}`);
@@ -54,7 +54,7 @@ async function postNationality(req, res) {
 
 async function deleteNationality(req, res) {
   try {
-    const nationality = await NationalitysModel.findByIdAndDelete(req.params.nationalityId);
+    const nationality = await NationalitiesModel.findByIdAndDelete(req.params.nationalityId);
     res.status(200).json(`${nationality.nationality} has been delete`);
   } catch (error) {
     res.status(500).send(`Error deleting nationality: ${error}`);

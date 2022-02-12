@@ -8,5 +8,5 @@ const nationalitySchema = new mongoose.Schema({
     }
 }); 
 
-const NationalitysModel = mongoose.model('nationalitys', nationalitySchema)
-module.exports = NationalitysModel 
+const NationalitiesModel = mongoose.model('nationalities', nationalitySchema)
+module.exports = NationalitiesModel 
