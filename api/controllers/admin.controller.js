@@ -1,3 +1,4 @@
+const LanguagesModel = require("../models/languages.model");
 const SkillsModel = require("../models/skills.model");
 
 async function postSkills(req, res) {
@@ -20,7 +21,18 @@ async function deleteSkill(req, res) {
   }
 }
 
+async function postLanguage(req, res) {
+  try {
+    const language = await LanguagesModel.create(req.body);
+    res.status(200).json(language);
+  } catch (error) {
+    res.status(500).send(`Error creating language: ${error}`);
+    throw new Error(`Error creating language: ${error}`);
+  }
+}
+
 module.exports = {
   postSkills,
-  deleteSkill
+  deleteSkill,
+  postLanguage
 };

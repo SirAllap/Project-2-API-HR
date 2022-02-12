@@ -21,11 +21,11 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Password is required']
+    required: true
   },
   phone: {
     type: Number,
-    required: [true, 'Phone number is required']
+    required: true
   },
   role: {
     type: String,
@@ -35,11 +35,11 @@ const userSchema = new mongoose.Schema({
   },
   birthDate: {
     type: Date,
-    required: [true, 'Birth date is required']
+    required: true 
   },
   createdAt: {
     type: Date,
-    default: Date.now() 
+    default: Date.now() // Get a timestamp :)
   }
 })
 
