@@ -11,8 +11,8 @@ const {
 
 router.post("/", authUser, authManager, createJobOffer);
 router.delete("/:jobOfferId", authUser, authManager, deleteJobOffer);
-router.get("/", authUser, authManager, getAllJobOffers);
-router.get("/:jobOfferId", authUser, authManager, getOneJobOffer);
+router.get("/", getAllJobOffers);
+router.get("/:jobOfferId", getOneJobOffer);
 router.put("/:jobOfferId", authUser, authManager, updateJobOffer);
 
 module.exports = router;

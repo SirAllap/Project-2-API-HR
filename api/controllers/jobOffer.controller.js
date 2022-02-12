@@ -31,6 +31,10 @@ async function getAllJobOffers(req, res) {
         path: "skills",
         model: "skills",
       },
+      {
+        path: "languages",
+        model: "languages",
+      }
     ]);
     res.status(200).json(jodOffers);
   } catch (error) {
