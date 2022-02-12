@@ -52,6 +52,20 @@ The API is made up of 5 different types of users:
 
 The Authentication flow for the application is:
 
+### Admin Endpoints
+
+METHOD | ENDPOINT                         | TOKEN | ROLE    | DESCRIPTION                | POST PARAMS    | RETURNS
+-------|----------------------------------|-------|---------|----------------------------|----------------|---------
+POST   | /admin/skills                    | YES   |  Admin  | Add skills to DB           | skills         | Skill created
+DELETE | /admin/skills/:skillId           | YES   |  Admin  | Delete skills form DB      | skills         | Skill deleted
+POST   | /admin/language                  | YES   |  Admin  | Add language to DB         | laguage        | Laguage created
+DELETE | /admin/language/:languageId      | YES   |  Admin  | Delete language form DB    | laguage        | Laguage deleted
+POST   | /admin/nationality               | YES   |  Admin  | Add nationality to DB      | nationality    | Nationalty created
+DELETE | /admin/nationality/:nationalityId| YES   |  Admin  | Delete nationality form DB | nationality    | Nationalty deleted
+POST   | /admin/category                  | YES   |  Admin  | Add category to DB         | category       | Category created
+DELETE | /admin/category/:categoryId      | YES   |  Admin  | Delete category form DB    | category       | Category deleted
+
+
 ### Users Endpoints (users/create. by admin)
                   
 METHOD | ENDPOINT         | TOKEN | ROLE    | DESCRIPTION              | POST PARAMS                                                     | RETURNS
