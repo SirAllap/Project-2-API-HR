@@ -5,9 +5,9 @@ const {
   postSkills,
   deleteSkill,
   postLanguage,
-  // deleteLanguage,
-  // postNationality,
-  // deleteNationality,
+  deleteLanguage,
+  postNationality,
+  deleteNationality,
   // postCategory,
   // deleteCategory
 } = require('../controllers/admin.controller')
@@ -15,9 +15,9 @@ const {
 router.post('/skills', authUser, authAdmin, postSkills)
 router.delete('/skills/:skillId', authUser, authAdmin, deleteSkill)
 router.post('/language', authUser, authAdmin, postLanguage)
-// router.delete('/language/:languageId ', deleteLanguage)
-// router.post('/nationality', postNationality)
-// router.delete('/nationality/:nationalityId', deleteNationality)
+router.delete('/language/:languageId', authUser, authAdmin, deleteLanguage)
+router.post('/nationality', authUser, authAdmin, postNationality)
+router.delete('/nationality/:nationalityId', authUser, authAdmin, deleteNationality)
 // router.post('/category', postCategory)
 // router.delete('/category/:categoryId', deleteCategory)
 
