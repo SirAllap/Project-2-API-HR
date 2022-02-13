@@ -19,6 +19,6 @@ router.delete('/language/:languageId', authUser, authAdmin, deleteLanguage)
 router.post('/nationality', authUser, authAdmin, postNationality)
 router.delete('/nationality/:nationalityId', authUser, authAdmin, deleteNationality)
 router.post('/category', authUser, authAdmin, postCategory)
-router.delete('/category/:categoryId', deleteCategory)
+router.delete('/category/:categoryId', authUser, authAdmin, deleteCategory)
 
 module.exports = router
