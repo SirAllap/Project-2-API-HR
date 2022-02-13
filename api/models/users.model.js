@@ -38,10 +38,10 @@ const userSchema = new mongoose.Schema({
     required: true 
   },
   createdAt: {
-    type: Number,
+    type: Date,
     default: Date.now() // Get a timestamp :)
   }
 })
 
-const userModel = mongoose.model('user', userSchema)
-module.exports = userModel
+const UserModel = mongoose.model('user', userSchema)
+module.exports = UserModel
