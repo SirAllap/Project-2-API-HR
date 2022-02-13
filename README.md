@@ -23,7 +23,7 @@ The API is made up of 5 different types of users:
 
    - Admin 
        - 1.- Can create/delete/modify all users accounts. 
-       - 2.- Can create/delete/modify skills 
+       - 2.- Can create/delete skills/nationalities/languages/categories
        - 3.- Can create/delete/modify job offer
 
    - Manager: 
@@ -33,13 +33,13 @@ The API is made up of 5 different types of users:
        - 4.- You can move a candidate from one job offer to another.
 
    - Recruiter: 
-       - 1.- See the job offers created by your Manager. 
-       - 2.- You can see all the candidates who have applied to a job offer. 
+       - 1.- See the job offers created.
+       - 2.- You can see all the candidates who have applied to a job offer.
        - 3.- Reject/add candidates to job offers.
 
    - Candidate: 
        - 1.- He or she can create an account. 
-       - 2-. YHe or she update the account details. 
+       - 2-. He or she update the account details. 
        - 3.- He or she see the job offers that have been published. 
        - 4.- He or she apply to job offers. 
        - 5.- He or she can see the offers to which you have applied.
@@ -66,7 +66,7 @@ POST   | /admin/category                  | YES   |  Admin  | Add category to DB
 DELETE | /admin/category/:categoryId      | YES   |  Admin  | Delete category form DB    | category       | Category deleted
 
 
-### Users Endpoints (users/create. by admin)
+### Users Endpoints
                   
 METHOD | ENDPOINT         | TOKEN | ROLE    | DESCRIPTION              | POST PARAMS                                                     | RETURNS
 -------|------------------|-------|---------|--------------------------|-----------------------------------------------------------------|--------------------
@@ -80,7 +80,6 @@ METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS      
 -------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
 POST   | /auth/signup     | -     | User Signup              | name, surname, email, phone, password           | token
 POST   | /auth/login      | -     | User Login               | email, password                                 | token
-POST   | /auth/check      | YES   | Auth Token check         | -                                               | -
 
 
 ### Profile Endpoints
@@ -94,10 +93,10 @@ DELETE | user/profile     | YES   | Candidate | Deletes user account     | passw
 
 ### Candidate Endpoints
 
-METHOD | ENDPOINT            | TOKEN | ROLE                  | DESCRIPTION                  | PARAMS               | RETURNS
--------|---------------------|-------|-----------------------|------------------------------|----------------------|-----------------
-GET    | /candidates         |  YES  | Manager, Recruiter    | Get a list of all candidates | query: search string | List of matching names, surnames and ids
-GET    | /candidates/:userId |  YES  | Manager, Recruiter    | Get candidate profile        | -                    | name, surname, email, phone, skills, expereince, requisitions
+METHOD | ENDPOINT                 | TOKEN | ROLE                  | DESCRIPTION                  | PARAMS               | RETURNS
+-------|--------------------------|-------|-----------------------|------------------------------|----------------------|-----------------
+GET    | users/candidates         |  YES  | Manager, Recruiter    | Get a list of all candidates | query: search string | List of matching names, surnames and ids
+GET    | users/candidates/:userId |  YES  | Manager, Recruiter    | Get candidate profile        | -                    | name, surname, email, phone, skills, expereince, requisitions
 
 
 ### JobOffer Endpoints
