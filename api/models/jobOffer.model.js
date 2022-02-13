@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+// const language = new mongoose.Schema({
+//   language: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "languages",
+//   },
+//   level: {
+//     type: String,
+//     enum: ["Basic", "Intermediate", "Native"],
+//     required: [true, "Level of the language is required"]
+//   },
+// });
+
 const jobOfferSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -24,10 +36,7 @@ const jobOfferSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "languages",
-      // level: {
-      //   type: String,
-      //   enum: ["Basic", "Intermediate", "Native"],
-      // },
+      required: [true, "Languages are required"],
     },
   ],
   requisitions: {
@@ -46,7 +55,7 @@ const jobOfferSchema = new mongoose.Schema({
     type: String,
     required: [true, "Salary is required"],
   },
-  // Category: [
+  // category: [
   //   {
   //     type: mongoose.Schema.Types.ObjectId,
   //     ref: "categories",
