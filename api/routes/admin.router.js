@@ -8,8 +8,8 @@ const {
   deleteLanguage,
   postNationality,
   deleteNationality,
-  // postCategory,
-  // deleteCategory
+  postCategory,
+  deleteCategory
 } = require('../controllers/admin.controller')
 
 router.post('/skills', authUser, authAdmin, postSkills)
@@ -18,7 +18,7 @@ router.post('/language', authUser, authAdmin, postLanguage)
 router.delete('/language/:languageId', authUser, authAdmin, deleteLanguage)
 router.post('/nationality', authUser, authAdmin, postNationality)
 router.delete('/nationality/:nationalityId', authUser, authAdmin, deleteNationality)
-// router.post('/category', postCategory)
-// router.delete('/category/:categoryId', deleteCategory)
+router.post('/category', authUser, authAdmin, postCategory)
+router.delete('/category/:categoryId', deleteCategory)
 
 module.exports = router
