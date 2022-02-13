@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+const language = new mongoose.Schema({
+  language: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "languages",
+  },
+  level: {
+    type: String,
+    enum: ["Basic", "Intermediate", "Native"],
+    required: [true, "Level of the language is required"]
+  },
+});
+
 const jobOfferSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -20,16 +32,7 @@ const jobOfferSchema = new mongoose.Schema({
       required: [true, "Skills are required"],
     },
   ],
-  languages: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "languages",
-      // level: {
-      //   type: String,
-      //   enum: ["Basic", "Intermediate", "Native"],
-      // },
-    },
-  ],
+  languages: [language],
   requisitions: {
     type: String,
   },
