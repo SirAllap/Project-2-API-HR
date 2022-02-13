@@ -26,16 +26,10 @@ async function deleteJobOffer(req, res) {
 
 async function getAllJobOffers(req, res) {
   try {
-    const jodOffers = await JobOfferModel.find(req.query).populate([
-      {
-        path: "skills",
-        model: "skills",
-      },
-      {
-        path: "languages",
-        model: "languages",
-      }
-    ]);
+    const jodOffers = await JobOfferModel.find(req.query)
+      .populate("skills", "skills")
+      .populate("languages", "language")
+      .populate("author", "name surname role" );
     res.status(200).json(jodOffers);
   } catch (error) {
     res.status(500).send(`Error obtaining job offers: ${error}`);
@@ -45,18 +39,9 @@ async function getAllJobOffers(req, res) {
 
 async function getOneJobOffer(req, res) {
   try {
-    const jobOffer = await JobOfferModel.findById(
-      req.params.jobOfferId
-    ).populate([
-      {
-        path: "skills",
-        model: "skills",
-      },
-      {
-        path: "languages",
-        model: "languages",
-      }
-    ]);
+    const jobOffer = await JobOfferModel.findById(req.params.jobOfferId)
+      .populate("skills", "skills")
+      .populate("languages", "language");
     res.status(200).json({
       Title: jobOffer.title,
       Company: jobOffer.company,
