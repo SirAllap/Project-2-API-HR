@@ -51,7 +51,7 @@ async function getOneJobOffer(req, res) {
   try {
     const jobOffer = await JobOfferModel.findById(req.params.jobOfferId)
       .populate("skills", "skills")
-      .populate("languages", "language");
+      .populate("languages.language", "language");
     res.status(200).json({
       Title: jobOffer.title,
       Company: jobOffer.company,
@@ -61,6 +61,7 @@ async function getOneJobOffer(req, res) {
       Work_model: jobOffer.workModel,
       Location: jobOffer.location,
       Salary: jobOffer.salary,
+      Requisition: jobOffer.requisitions
     });
   } catch (error) {
     res.status(500).send(`Error obtaining job offer: ${error}`);
@@ -89,11 +90,17 @@ async function updateJobOffer(req, res) {
 
 async function applyToJobOffer(req, res) {
   try {
+    req.body.candidate = res.locals.user.id;
+    const id = await req.params.jobOfferId;
+    req.body.jobPost = id;
     const apply = await RequisitionModel.create(req.body);
+    const jobOffer = await JobOfferModel.findById(req.params.jobOfferId);
+    jobOffer.requisitions.push(apply.id)
+    await jobOffer.save();
     res.status(200).json(apply);
   } catch (error) {
-    res.status(500).send(`Error applying job offer: ${error}`);
-    throw new Error(`Error applying job offer: ${error}`);
+    res.status(500).send(`Error applying to job offer: ${error}`);
+    throw new Error(`Error applying to job offer: ${error}`);
   }
 }
 

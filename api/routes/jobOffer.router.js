@@ -21,8 +21,9 @@ router.delete("/:jobOfferId", authUser, authManager, deleteJobOffer);
 router.get("/", getAllJobOffers);
 router.get("/:jobOfferId", getOneJobOffer);
 router.put("/:jobOfferId", authUser, authManager, updateJobOffer);
+
 router.post(
-  "/.jobOfferId/requisition",
+  "/:jobOfferId/apply",
   authUser,
   authCandidate,
   applyToJobOffer

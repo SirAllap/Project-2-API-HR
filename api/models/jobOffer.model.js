@@ -33,10 +33,12 @@ const jobOfferSchema = new mongoose.Schema({
     },
   ],
   languages: [language],
-  requisitions: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "requisitions",
-  },
+  requisitions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "requisitions",
+    },
+  ],
   contractType: {
     type: String,
     required: [true, "Contract type is required"],

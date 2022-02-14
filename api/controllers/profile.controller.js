@@ -38,9 +38,9 @@ async function deleteUserProfile(req, res) {
 
 async function addExperience(req, res) {
   try {
+    req.body.userCand = res.locals.user.id;
     const experience = await ExperienceModel.create(req.body)
-    req.body.experience = res.locals.experiences.id;
-    res.status(200).json(`${experience}`)
+    res.status(200).json(experience)
   } catch (error) {
     res.status(500).send(`Error adding experience to your profile: ${error}`);
     throw new Error(`Error adding experience to your profile: ${error}`);
