@@ -30,7 +30,6 @@ async function getAllJobOffers(req, res) {
     const jodOffers = await JobOfferModel.find(req.query, {
       skills: 0,
       languages: 0,
-      workModel: 0,
       salary: 0,
       author: 0,
       postCreatedDate: 0,
