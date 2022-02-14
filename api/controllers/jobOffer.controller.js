@@ -94,8 +94,11 @@ async function applyToJobOffer(req, res) {
     req.body.jobPost = id;
     const apply = await RequisitionModel.create(req.body);
     const jobOffer = await JobOfferModel.findById(req.params.jobOfferId);
-    jobOffer.requisitions.push(apply.id)
+    jobOffer.requisition.push(apply.id)
     await jobOffer.save();
+    const user = await res.locals.user
+    user.requisition.push(apply.id);
+    await user.save();
     res.status(200).json(apply);
   } catch (error) {
     res.status(500).send(`Error applying to job offer: ${error}`);

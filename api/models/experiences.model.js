@@ -60,11 +60,7 @@ const experienceSchema = new mongoose.Schema({
       ref: "nationalities",
       required: [true, "Description is required"],
     },
-  ],
-  requisition: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "requisitions",
-  }],
+  ]
 });
 
 const ExperienceModel = mongoose.model("experience", experienceSchema);

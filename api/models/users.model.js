@@ -47,6 +47,12 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "experience",
   },
+  requisition: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "requisition",
+    },
+  ],
 });
 
 const UserModel = mongoose.model("user", userSchema);

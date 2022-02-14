@@ -33,12 +33,6 @@ const jobOfferSchema = new mongoose.Schema({
     },
   ],
   languages: [language],
-  requisitions: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "requisitions",
-    },
-  ],
   contractType: {
     type: String,
     required: [true, "Contract type is required"],
@@ -73,6 +67,12 @@ const jobOfferSchema = new mongoose.Schema({
     ref: "user",
     immutable: true,
   },
+  requisition: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "requisition",
+    },
+  ],
   postCreatedDate: {
     type: Date,
     default: Date.now(),

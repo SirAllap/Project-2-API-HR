@@ -4,10 +4,23 @@ const UserModel = require("../models/users.model");
 const ExperienceModel = require("../models/experiences.model");
 
 module.exports = {
+  getUserProfile,
   updateUserProfile,
   deleteUserProfile,
   addExperience
 };
+
+async function getUserProfile(req, res) {
+  try {
+    const user = await UserModel.findById(res.locals.user.id)
+    .populate("experience")
+    .populate("requisition")
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).send(`Error getting user profile: ${error}`);
+    throw new Error(`Error getting user profile: ${error}`);
+  }
+}
 
 async function updateUserProfile(req, res) {
   try {
@@ -40,6 +53,9 @@ async function addExperience(req, res) {
   try {
     req.body.userCand = res.locals.user.id;
     const experience = await ExperienceModel.create(req.body)
+    const user = await res.locals.user
+    user.experience = experience.id;
+    await user.save();
     res.status(200).json(experience)
   } catch (error) {
     res.status(500).send(`Error adding experience to your profile: ${error}`);
