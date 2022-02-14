@@ -23,12 +23,12 @@ The API is made up of 5 different types of users:
 
    - Admin 
        - 1.- Can create/delete/modify all users accounts. 
-       - 2.- Can create/delete skills/nationalities/languages/categories
-       - 3.- Can create/delete/modify job offer
+       - 2.- Can create/delete skills/nationalities/languages/categories.
+       - 3.- Can create/delete/modify job offer.
 
    - Manager: 
        - 1.- Add/modify/delete/see job offers and requisitions. 
-       - 2.- Assess the candidate's abilities (Hard skills and level) 
+       - 2.- Assess the candidate's abilities (Hard skills and level).
        - 3.- Reject/add candidates to job offers. 
        - 4.- You can move a candidate from one job offer to another.
 
@@ -38,11 +38,11 @@ The API is made up of 5 different types of users:
        - 3.- Reject/add candidates to job offers.
 
    - Candidate: 
-       - 1.- He or she can create an account. 
-       - 2-. He or she update the account details. 
-       - 3.- He or she see the job offers that have been published. 
-       - 4.- He or she apply to job offers. 
-       - 5.- He or she can see the offers to which you have applied.
+       - 1.- Can create an account. 
+       - 2-. Can update the account details. 
+       - 3.- Can see the job offers that have been published. 
+       - 4.- Can apply to job offers. 
+       - 5.- Can see the offers to which you have applied.
 
    - Customer 
        - 1.-You can register. 
