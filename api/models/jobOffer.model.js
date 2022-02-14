@@ -37,6 +37,15 @@ const jobOfferSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "requisitions",
   },
+  contractType: {
+    type: String,
+    required: [true, "Contract type is required"],
+  },
+  workSchedule: {
+    type: String,
+    enum: ["Full time", "Part time"],
+    required: [true, "Work Schedule is required"],
+  },
   workModel: {
     type: String,
     enum: ["Remote", "Hybrid", "Office"],
@@ -50,13 +59,13 @@ const jobOfferSchema = new mongoose.Schema({
     type: String,
     required: [true, "Salary is required"],
   },
-  // category: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "categories",
-  //     required: [true, "Categories are required"],
-  //   },
-  // ],
+  category: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "categories",
+      required: [true, "Categories are required"],
+    },
+  ],
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
