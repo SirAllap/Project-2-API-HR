@@ -1,5 +1,6 @@
 const JobOfferModel = require("../models/jobOffer.model");
 const UserModel = require("../models/users.model");
+const RequisitionModel = require("../models/requisitions.model");
 
 async function createJobOffer(req, res) {
   try {
@@ -26,10 +27,19 @@ async function deleteJobOffer(req, res) {
 
 async function getAllJobOffers(req, res) {
   try {
-    const jodOffers = await JobOfferModel.find(req.query)
+    const jodOffers = await JobOfferModel.find(req.query, {
+      skills: 0,
+      languages: 0,
+      workModel: 0,
+      salary: 0,
+      author: 0,
+      postCreatedDate: 0,
+      __v: 0,
+      description: 0,
+    })
       .populate("skills", "skills")
       .populate("languages", "language")
-      .populate("author", "name surname role" );
+      .populate("author", "name surname role");
     res.status(200).json(jodOffers);
   } catch (error) {
     res.status(500).send(`Error obtaining job offers: ${error}`);
@@ -51,7 +61,6 @@ async function getOneJobOffer(req, res) {
       Work_model: jobOffer.workModel,
       Location: jobOffer.location,
       Salary: jobOffer.salary,
-      Author: jobOffer.author,
     });
   } catch (error) {
     res.status(500).send(`Error obtaining job offer: ${error}`);
@@ -72,7 +81,20 @@ async function updateJobOffer(req, res) {
     res
       .status(200)
       .json(`${jobOffer.title} post has been successfully updated`);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send(`Error updating job offer: ${error}`);
+    throw new Error(`Error updating job offer: ${error}`);
+  }
+}
+
+async function applyToJobOffer(req, res) {
+  try {
+    const apply = await RequisitionModel.create(req.body);
+    res.status(200).json(apply);
+  } catch (error) {
+    res.status(500).send(`Error applying job offer: ${error}`);
+    throw new Error(`Error applying job offer: ${error}`);
+  }
 }
 
 module.exports = {
@@ -81,4 +103,5 @@ module.exports = {
   getAllJobOffers,
   getOneJobOffer,
   updateJobOffer,
+  applyToJobOffer,
 };
