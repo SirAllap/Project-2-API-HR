@@ -50,7 +50,7 @@ const experienceSchema = new mongoose.Schema({
     ownCar: {
       type: String,
       enum: ["Yes", "No"],
-    }
+    },
   },
   languages: [language],
   nationality: [
@@ -58,7 +58,7 @@ const experienceSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "nationalities",
     },
-  ]
+  ],
 });
 
 const ExperienceModel = mongoose.model("experience", experienceSchema);
