@@ -39,7 +39,6 @@ const experienceSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "skills",
-      required: [true, "Skills are required"],
     },
   ],
   experience: [experience],
@@ -58,7 +57,6 @@ const experienceSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "nationalities",
-      required: [true, "Description is required"],
     },
   ]
 });
