@@ -35,6 +35,8 @@ async function getAllJobOffers(req, res) {
       postCreatedDate: 0,
       __v: 0,
       description: 0,
+      category: 0,
+      requisition: 0,
     })
       .populate("skills", "skills")
       .populate("languages", "language")

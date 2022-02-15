@@ -23,8 +23,19 @@ async function createUser(req, res) {
 
 async function getAllUsers(req, res) {
   try {
-    const users = await UserModel.find(req.query, { password: 0 });
-    res.status(200).json(users);
+    if (res.locals.user.role === "admin") {
+      const users = await UserModel.find(req.query);
+      res.status(200).json(users);
+    } else {
+      const users = await UserModel.find(
+        req.query,
+        {
+          role: "candidate",
+        },
+        { password: 0 }
+      );
+      res.status(200).json(users);
+    }
   } catch (error) {
     res.status(500).send(`Error obtaining users: ${error}`);
     throw new Error(`Error obtaining users: ${error}`);
@@ -33,8 +44,18 @@ async function getAllUsers(req, res) {
 
 async function getOneUser(req, res) {
   try {
-    const user = await UserModel.findById(req.params.userId, { password: 0 });
-    res.status(200).json(user);
+    const user = await UserModel.findById(req.params.userId, { password: 0 })
+      .populate("requisition")
+      .populate("experience");
+    if (
+      user.role !== "candidate" &&
+      (res.locals.user.role === "manager" ||
+        res.locals.user.role === "recruiter")
+    ) {
+      res.status(401).send("You are not allowed to see this user");
+    } else {
+      res.status(200).json(user);
+    }
   } catch (error) {
     res.status(500).send(`Error obtaining user: ${error}`);
     throw new Error(`Error obtaining user: ${error}`);
