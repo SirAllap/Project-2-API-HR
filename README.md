@@ -1,14 +1,15 @@
-# HR-api
+# HR-Web
 
 ### Our API helps companies hire developers tailored to a specific need.
 
-The API is made up of 5 different types of users:
+The core of this API is to drive consulting companies throughout all the process that a job offer require, helps find the best candidates, skills that best match with what you are looking for, split the responsibilities by couple of roles to make it simple.
+
+The API is made up of 4 different types of users:
 
     Admin
     Manager
     Recruiter
     Candidates
-    Client 
     
    - Consulting (overview): 
       1.- The client has a need that he transmit to us through the API. 
