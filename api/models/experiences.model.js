@@ -19,23 +19,6 @@ const experience = new mongoose.Schema({
   },
 });
 
-const other = new mongoose.Schema({
-  drivingLicense: {
-    type: String,
-    enum: ["A1", "A2", "A", "B"],
-  },
-  ownCar: {
-    type: String,
-    enum: ["Yes", "No"],
-  },
-  nationality: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "nationalities",
-    },
-  ],
-});
-
 const language = new mongoose.Schema({
   language: {
     type: mongoose.Schema.Types.ObjectId,
@@ -47,22 +30,36 @@ const language = new mongoose.Schema({
   },
 });
 
-const candidateSchema = new mongoose.Schema({
+const experienceSchema = new mongoose.Schema({
+  userCand: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
   skills: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "skills",
-      required: [true, "Skills are required"],
     },
   ],
   experience: [experience],
-  other: [other],
+  other: {
+    drivingLicense: {
+      type: String,
+      enum: ["A1", "A2", "A", "B"],
+    },
+    ownCar: {
+      type: String,
+      enum: ["Yes", "No"],
+    },
+  },
   languages: [language],
-  // requisition: [{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "requisitions",
-  // }],
+  nationality: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "nationalities",
+    },
+  ],
 });
 
-const CandidateModel = mongoose.model("candidate", candidateSchema);
-module.exports = CandidateModel;
+const ExperienceModel = mongoose.model("experience", experienceSchema);
+module.exports = ExperienceModel;

@@ -14,9 +14,9 @@ The API is made up of 4 different types of users:
 Our main idea:
 ___________________________________________________
    - Consulting (overview): 
-   
+
       1.- The client has a need that he transmit to us through the API. 
-      
+
       2.- The manager gets in touch with that client to learn more about their needs and post that job offer. 
       
       3.- The recruiter is in charge of getting potential candidates to report them to the manager. 
@@ -40,6 +40,7 @@ ___________________________________________________
        - 1.- See the job offers created.
        - 2.- You can see all the candidates who have applied to a job offer.
        - 3.- ???You can move a candidate from one job offer to another???
+
 
    - Candidate: 
        - 1.- Can create an account. 
