@@ -15,7 +15,7 @@ The API is made up of 5 different types of users:
     Client 
     
    - Consulting (overview): 
-      1.- The client has a need that he "can" transmit to us through the API. 
+      1.- The client has a need that he transmit to us through the API. 
       2.- The manager gets in touch with that client to learn more about their needs and post that job offer. 
       3.- The recruiter is in charge of getting potential candidates to report them to the manager. 
       4.- The manager filters the list that the recruiter has given him and schedules interviews with the possible candidates. 
@@ -27,30 +27,33 @@ The API is made up of 5 different types of users:
        - 3.- Can create/delete/modify job offer.
 
    - Manager: 
-       - 1.- Add/modify/delete/see job offers and requisitions. 
-       - 2.- Assess the candidate's abilities (Hard skills and level).
-       - 3.- Reject/add candidates to job offers. 
-       - 4.- You can move a candidate from one job offer to another.
+       - 1.- Add/modify/delete/see job offers.
+       - 2.- See who apply to the job offer.
+       - 3.- Reject/Interview candidate from state of requisition. 
+       - 4.- ???You can move a candidate from one job offer to another???
 
    - Recruiter: 
        - 1.- See the job offers created.
        - 2.- You can see all the candidates who have applied to a job offer.
-       - 3.- Reject/add candidates to job offers.
+       - 3.- Reject/Interview candidate from state of requisition. 
 
    - Candidate: 
        - 1.- Can create an account. 
-       - 2-. Can update the account details. 
-       - 3.- Can see the job offers that have been published. 
-       - 4.- Can apply to job offers. 
-       - 5.- Can see the offers to which you have applied.
-
-   - Customer 
-       - 1.-You can register. 
-       - 2.-You can assess the developer based on the performance of the work done.
-
+       - 2-. Can update the account details.
+       - 3-. Can add experiences to his profile
+       - 4.- Can see the job offers that have been published. 
+       - 5.- Can apply to job offers. 
+       - 6.- Can see the offers to which he have applied.
 
 
 The Authentication flow for the application is:
+
+### Authentication Endpoints
+
+METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
+-------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
+POST   | /auth/signup     | -     | User Signup              | name, surname, email, phone, password           | token
+POST   | /auth/login      | -     | User Login               | email, password                                 | token
 
 ### Admin Endpoints
 
@@ -73,13 +76,6 @@ METHOD | ENDPOINT         | TOKEN | ROLE    | DESCRIPTION              | POST PA
 DELETE | /users/:userId   | YES   |  Admin  | Deletes user account     | password                                                        | User deletion confirmation
 PUT    | /users/:userId   | YES   |  Admin  | Update profile           | email, name, phone, password ( candidate: + skills, experience) | Updated user data
 
-
-### Authentication Endpoints
-
-METHOD | ENDPOINT         | TOKEN | DESCRIPTION              | POST PARAMS                                     | RETURNS
--------|------------------|-------|--------------------------|-------------------------------------------------|--------------------
-POST   | /auth/signup     | -     | User Signup              | name, surname, email, phone, password           | token
-POST   | /auth/login      | -     | User Login               | email, password                                 | token
 
 
 ### Profile Endpoints
@@ -108,5 +104,6 @@ GET    | /job-offer                       | NO    | All users     | Get all jobs
 GET    | /job-offer/:jobId                | NO    | All users     | Get full job offer  | -                                               | tittle, postDate, company, description, skills 
 POST   | /job-offer/:jobId/requisitions   | YES   | Candidate     | Apply candidate ID  | -                                               | Requisiton
 
+### Requisition Endpoints
 
 ### ¿Ola ke ase?
