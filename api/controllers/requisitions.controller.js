@@ -4,6 +4,7 @@ const RequisitionModel = require("../models/requisitions.model");
 module.exports = {
   rejectRequisition,
   interviewRequisition,
+  hireRequisition
 };
 
 async function rejectRequisition(req, res) {
@@ -11,7 +12,7 @@ async function rejectRequisition(req, res) {
     const reject = await RequisitionModel.findById(req.params.reqId);
     reject.state = "Rejected";
     reject.save();
-    res.status(200).json(reject);
+    res.status(200).json(`The state of requisition has been changed to ${reject.state}`);
   } catch (error) {
     res.status(500).send(`Error updating requisition: ${error}`);
   }
@@ -22,7 +23,18 @@ async function interviewRequisition(req, res) {
     const interview = await RequisitionModel.findById(req.params.reqId);
     interview.state = "Interview pending";
     interview.save();
-    res.status(200).json(interview);
+    res.status(200).json(`The state of requisition has been changed to ${interview.state}`);
+  } catch (error) {
+    res.status(500).send(`Error updating requisition: ${error}`);
+  }
+} 
+
+async function hireRequisition(req, res) {
+  try {
+    const hire = await RequisitionModel.findById(req.params.reqId);
+    hire.state = "Hired";
+    hire.save();
+    res.status(200).json(`The state of requisition has been changed to ${hire.state}`);
   } catch (error) {
     res.status(500).send(`Error updating requisition: ${error}`);
   }

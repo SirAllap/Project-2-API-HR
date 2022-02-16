@@ -18,7 +18,7 @@ const requisitionSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ["To review", "Rejected", "Interview pending"],
+    enum: ["To review", "Rejected", "Interview pending", "Hired"],
     required: false,
     default: "To review",
   },

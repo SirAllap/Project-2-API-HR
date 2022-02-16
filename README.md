@@ -33,7 +33,7 @@ ___________________________________________________
    - Manager: 
        - 1.- Add/modify/delete/see job offers.
        - 2.- See who apply to the job offer.
-       - 3.- Reject/Interview candidate from state of requisition. 
+       - 3.- Reject/Interview/Hire candidate from state of requisition. 
        - 4.- ???You can move a candidate from one job offer to another???
 
    - Recruiter: 
@@ -85,7 +85,6 @@ DELETE | /users/:userId   | YES   |  Admin  | Deletes user account     | passwor
 PUT    | /users/:userId   | YES   |  Admin  | Update profile           | email, name, phone, password ( candidate: + skills, experience) | Updated user data
 
 
-
 ### Profile Endpoints
 
 METHOD | ENDPOINT         | TOKEN | ROLE      | DESCRIPTION              | POST PARAMS                                      | RETURNS
@@ -93,19 +92,6 @@ METHOD | ENDPOINT         | TOKEN | ROLE      | DESCRIPTION              | POST 
 GET    | user/profile     | YES   | All       | View own profile         | -                                                | name, surname, email, phone ( candidate: + skills, experience)
 PUT    | user/profile     | YES   | Candidate | Update profile           | email, name, phone, skills, experience, password | Updated user data
 DELETE | user/profile     | YES   | Candidate | Deletes user account     | password                                         | User deletion confirmation
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-### Candidate Endpoints
-
-METHOD | ENDPOINT                 | TOKEN | ROLE                  | DESCRIPTION                  | PARAMS               | RETURNS
--------|--------------------------|-------|-----------------------|------------------------------|----------------------|-----------------
-GET    | users/candidates         |  YES  | Manager, Recruiter    | Get a list of all candidates | query: search string | List of matching names, surnames and ids
-GET    | users/candidates/:userId |  YES  | Manager, Recruiter    | Get candidate profile        | -                    | name, surname, email, phone, skills, expereince, requisitions
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ### JobOffer Endpoints
@@ -119,4 +105,8 @@ POST   | /job-offer/:jobId/requisitions   | YES   | Candidate     | Apply candid
 
 ### Requisition Endpoints
 
-### ¿Ola ke ase?
+METHOD | ENDPOINT                         | TOKEN | ROLE          |  DESCRIPTION                             | PARAMS                      | RETURNS
+-------|----------------------------------|-------|---------------|------------------------------------------|-----------------------------|--------------------
+PUT    | /requisition/:reqId/reject       | YES   | Admin/Manager | Change state of requisition to reject    | Requisition ID              | Requisition state updated
+PUT    | /requisition/:reqId/interview    | YES   | Admin/Manager | Change state of requisition to interview | Requisition ID              | Requisition state updated
+PUT    | /requisition/:reqId/hire         | YES   | Admin/Manager | Change state of requisition to hired     | Requisition ID              | Requisition state updated
