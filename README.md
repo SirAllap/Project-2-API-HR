@@ -2,7 +2,7 @@
 
 ### Our API helps companies hire developers tailored to a specific need.
 
-The core of this API is to drive consulting companies throughout all the process that a job offer require, helps find the best candidates, skills that best match with what you are looking for, split the responsibilities by couple of roles to make it simple.
+The core of this API is to drive consulting companies throughout all the process that a job offer require, helps find the best candidates, skills that best match with what you are looking for, split the responsibilities with roles to be more efficient.
 
 The API is made up of 4 different types of users:
 
