@@ -39,7 +39,7 @@ ___________________________________________________
    - Recruiter: 
        - 1.- See the job offers created.
        - 2.- You can see all the candidates who have applied to a job offer.
-       - 3.- Reject/Interview candidate from state of requisition. 
+       - 3.- ???You can move a candidate from one job offer to another???
 
    - Candidate: 
        - 1.- Can create an account. 
