@@ -1,9 +1,5 @@
 # HR-api
 
-## API Endpoints
-
-All API Request must be prepended with /api
-
 ## Our API helps companies hire developers tailored to a specific need.
 
 The API is made up of 5 different types of users:
@@ -45,6 +41,9 @@ The API is made up of 5 different types of users:
        - 5.- Can apply to job offers. 
        - 6.- Can see the offers to which he have applied.
 
+# API Endpoints
+
+All API Request must be prepended with /api
 
 The Authentication flow for the application is:
 
