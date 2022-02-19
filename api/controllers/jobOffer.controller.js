@@ -84,7 +84,7 @@ async function getOneJobOffer(req, res) {
       const jobOffer = await JobOfferModel.findById(req.params.jobOfferId)
         .populate("skills")
         .populate("languages.language")
-        .populate("author")
+        .populate("author",  "name surname role")
         .populate("category")
         .populate({
           path: "requisition",
@@ -106,6 +106,14 @@ async function getOneJobOffer(req, res) {
             },
           },
         });
+
+        // path: "requisition",
+        // select: {"candidate":0, "__v":0},
+        // populate: {
+        //   path: "jobPost",
+        //   model: "jobOffer",
+        //   select: {"title": 1}
+
       return res.status(200).json({ jobOffer });
     }
   } catch (error) {
