@@ -22,7 +22,10 @@ async function createUser(req, res) {
 
 async function getAllUsers(req, res) {
   try {
-    if (res.locals.user.role === "admin" || res.locals.user.role === "manager") {
+    if (
+      res.locals.user.role === "admin" ||
+      res.locals.user.role === "manager"
+    ) {
       const users = await UserModel.find(req.query);
       res.status(200).json(users);
     } else {
@@ -59,7 +62,31 @@ async function getOneUser(req, res) {
           select: { title: 1 },
         },
       })
-      .populate("experience");
+      .populate({
+        path: "experience",
+        model: "experience",
+        select: { userCand: 0 },
+        populate: {
+          path: "skills",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        populate: {
+          path: "languages.language",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        populate: {
+          path: "nationality",
+          select: { __v: 0 },
+        },
+      });
     if (
       user.role !== "candidate" &&
       (res.locals.user.role === "manager" ||

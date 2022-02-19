@@ -1,10 +1,3 @@
-// Candidate:     <ObjectId> (Candidate)
-// JobPost:       <ObjectId> (JobOffer)
-// Valoraciones:  String
-// ReqDate:       Date
-// State:         String enum
-//                [To review, Rejected, Interview pending]
-
 const mongoose = require("mongoose");
 
 const requisitionSchema = new mongoose.Schema({

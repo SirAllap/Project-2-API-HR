@@ -19,6 +19,7 @@ async function getUserProfile(req, res) {
       password: 0,
       role: 0,
       createdAt: 0,
+      skills: 0,
       __v: 0,
     })
       .populate({
@@ -33,7 +34,23 @@ async function getUserProfile(req, res) {
       .populate({
         path: "experience",
         model: "experience",
-        select: { userCand: 0, __v: 0 },
+        select: { userCand: 0 },
+        populate: {
+          path: "skills",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        populate: {
+          path: "languages.language",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
         populate: {
           path: "nationality",
           select: { __v: 0 },
