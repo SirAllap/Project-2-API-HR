@@ -50,7 +50,15 @@ async function getAllUsers(req, res) {
 async function getOneUser(req, res) {
   try {
     const user = await UserModel.findById(req.params.userId, { password: 0 })
-      .populate("requisition")
+    .populate({
+      path: "requisition",
+      select: { candidate: 0, __v: 0 },
+      populate: {
+        path: "jobPost",
+        model: "jobOffer",
+        select: { title: 1}
+      },
+    })
       .populate("experience");
     if (
       user.role !== "candidate" &&

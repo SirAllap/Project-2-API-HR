@@ -36,9 +36,7 @@ async function getAllJobOffers(req, res) {
         description: 0,
         category: 0,
         requisition: 0,
-      })
-        .populate("skills", "skills")
-        .populate("languages", "language");
+      });
       return res.status(200).json(jodOffers);
     } else {
       const jodOffers = await JobOfferModel.find(req.query, {
@@ -49,10 +47,7 @@ async function getAllJobOffers(req, res) {
         __v: 0,
         description: 0,
         category: 0,
-      })
-        .populate({ path: "skills", select: { skills: 1, __v: 0 } })
-        .populate("languages", "language")
-        .populate("author", "name surname role");
+      }).populate("author", "name surname role");
       return res.status(200).json(jodOffers);
     }
   } catch (error) {
@@ -64,9 +59,9 @@ async function getOneJobOffer(req, res) {
   try {
     if (res.locals.user.role === "candidate") {
       const jobOffer = await JobOfferModel.findById(req.params.jobOfferId)
-        .populate("skills")
-        .populate("languages.language")
-        .populate("category");
+        .populate({ path: "skills", select: { skills: 1 } })
+        .populate({ path: "languages.language", select: { language: 1 } })
+        .populate({ path: "category", select: { category: 1 } });
       return res.status(200).json({
         Title: jobOffer.title,
         Company: jobOffer.company,
@@ -82,38 +77,25 @@ async function getOneJobOffer(req, res) {
       });
     } else {
       const jobOffer = await JobOfferModel.findById(req.params.jobOfferId)
-        .populate("skills")
-        .populate("languages.language")
+        .populate({ path: "skills", select: { skills: 1 } })
+        .populate({ path: "languages.language", select: { language: 1 } })
+        .populate({ path: "category", select: { category: 1 } })
         .populate("author", "name surname role")
-        .populate("category")
         .populate({
           path: "requisition",
+          select: { jobPost: 0, __v: 0 },
           populate: {
             path: "candidate",
             model: "user",
+            select: { name: 1, surname: 1, email: 1 },
             populate: {
               path: "experience",
               model: "experience",
-              populate: "skills",
-              populate: {
-                path: "languages",
-                populate: {
-                  path: "language",
-                  model: "languages",
-                },
-              },
+              select: { userCand: 0, other: 0, skills: 0, languages: 0 },
               populate: "nationality",
             },
           },
         });
-
-      // path: "requisition",
-      // select: {"candidate":0, "__v":0},
-      // populate: {
-      //   path: "jobPost",
-      //   model: "jobOffer",
-      //   select: {"title": 1}
-
       return res.status(200).json({ jobOffer });
     }
   } catch (error) {
@@ -151,7 +133,7 @@ async function applyToJobOffer(req, res) {
     const user = await res.locals.user;
     user.requisition.push(apply.id);
     await user.save();
-    res.status(200).json(apply);
+    res.status(200).json("You has been successfully apply to job offer");
   } catch (error) {
     res.status(500).send(`Error applying to job offer: ${error}`);
   }

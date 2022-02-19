@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt"); // require to encrypt passwords
 
 const UserModel = require("../models/users.model");
 const ExperienceModel = require("../models/experiences.model");
+const { populate } = require("../models/users.model");
 
 module.exports = {
   getUserProfile,
@@ -14,9 +15,30 @@ module.exports = {
 
 async function getUserProfile(req, res) {
   try {
-    const user = await UserModel.findById(res.locals.user.id)
-      .populate("experience")
-      .populate("requisition");
+    const user = await UserModel.findById(res.locals.user.id, {
+      password: 0,
+      role: 0,
+      createdAt: 0,
+      __v: 0,
+    })
+      .populate({
+        path: "requisition",
+        select: { candidate: 0, __v: 0 },
+        populate: {
+          path: "jobPost",
+          model: "jobOffer",
+          select: { title: 1 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        select: { userCand: 0, __v: 0 },
+        populate: {
+          path: "nationality",
+          select: { __v: 0 },
+        },
+      });
     res.status(200).json(user);
   } catch (error) {
     res.status(500).send(`Error getting user profile: ${error}`);
@@ -55,7 +77,9 @@ async function addExperience(req, res) {
     const user = await res.locals.user;
     user.experience = experience.id;
     await user.save();
-    res.status(200).json(experience);
+    res
+      .status(200)
+      .json("Experience has been successfully added to your profile");
   } catch (error) {
     res.status(500).send(`Error adding experience to your profile: ${error}`);
   }
@@ -70,7 +94,7 @@ async function updateExperience(req, res) {
         new: true,
         runValidator: true,
       }
-    );
+    ).populate("skills");
     experience.save();
     res.status(200).json(experience);
   } catch (error) {
