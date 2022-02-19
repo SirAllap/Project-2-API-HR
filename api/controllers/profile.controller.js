@@ -16,13 +16,7 @@ async function getUserProfile(req, res) {
   try {
     const user = await UserModel.findById(res.locals.user.id)
       .populate("experience")
-      .populate({
-        path: "requisition",
-        populate: {
-          path: "jobPost",
-          model: "jobOffer",
-        },
-      });
+      .populate({"requisition"});
     res.status(200).json(user);
   } catch (error) {
     res.status(500).send(`Error getting user profile: ${error}`);
