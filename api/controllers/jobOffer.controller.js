@@ -50,7 +50,7 @@ async function getAllJobOffers(req, res) {
         description: 0,
         category: 0,
       })
-        .populate({path: "skills", select: {"skills":1, "__v":0}})
+        .populate({ path: "skills", select: { skills: 1, __v: 0 } })
         .populate("languages", "language")
         .populate("author", "name surname role");
       return res.status(200).json(jodOffers);
@@ -84,7 +84,7 @@ async function getOneJobOffer(req, res) {
       const jobOffer = await JobOfferModel.findById(req.params.jobOfferId)
         .populate("skills")
         .populate("languages.language")
-        .populate("author",  "name surname role")
+        .populate("author", "name surname role")
         .populate("category")
         .populate({
           path: "requisition",
@@ -99,20 +99,20 @@ async function getOneJobOffer(req, res) {
                 path: "languages",
                 populate: {
                   path: "language",
-                  model: "languages"
-                }
+                  model: "languages",
+                },
               },
               populate: "nationality",
             },
           },
         });
 
-        // path: "requisition",
-        // select: {"candidate":0, "__v":0},
-        // populate: {
-        //   path: "jobPost",
-        //   model: "jobOffer",
-        //   select: {"title": 1}
+      // path: "requisition",
+      // select: {"candidate":0, "__v":0},
+      // populate: {
+      //   path: "jobPost",
+      //   model: "jobOffer",
+      //   select: {"title": 1}
 
       return res.status(200).json({ jobOffer });
     }
