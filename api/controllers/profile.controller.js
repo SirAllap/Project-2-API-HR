@@ -18,9 +18,9 @@ async function getUserProfile(req, res) {
       .populate("experience")
       .populate({
         path: "requisition",
-        populate:{
+        populate: {
           path: "jobPost",
-          model: "jobOffer", "title"
+          model: "jobOffer",
         },
       });
     res.status(200).json(user);
