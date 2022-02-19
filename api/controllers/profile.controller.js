@@ -72,7 +72,7 @@ async function updateUserProfile(req, res) {
         runValidator: true,
       }
     );
-    res.status(200).json(user);
+    res.status(200).json("Changes has been successfully saved");
   } catch (error) {
     res.status(500).send(`Error updating user profile: ${error}`);
   }
