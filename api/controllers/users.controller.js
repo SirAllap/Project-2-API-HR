@@ -111,7 +111,7 @@ async function updateUser(req, res) {
         runValidator: true,
       }
     );
-    res.status(200).json(user);
+    res.status(200).json("Your changes were successfully saved");
   } catch (error) {
     res.status(500).send(`Error finding user: ${error}`);
   }

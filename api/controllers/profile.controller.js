@@ -113,7 +113,7 @@ async function updateExperience(req, res) {
       }
     ).populate("skills");
     experience.save();
-    res.status(200).json(experience);
+    res.status(200).json("Experience has been updated successfully");
   } catch (error) {
     res.status(500).send(`Error updating experience to your profile: ${error}`);
   }
@@ -126,7 +126,7 @@ async function deleteExperience(req, res) {
     );
     experience.experience.remove(req.params.expId);
     experience.save();
-    res.status(200).json(experience.experience);
+    res.status(200).json("Experience has been successfully deleted");
   } catch (error) {
     res.status(500).send(`Error deleting experience to your profile: ${error}`);
   }
