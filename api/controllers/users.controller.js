@@ -26,7 +26,7 @@ async function getAllUsers(req, res) {
       res.locals.user.role === "admin" ||
       res.locals.user.role === "manager"
     ) {
-      const users = await UserModel.find(req.query);
+      const users = await UserModel.find(req.query,{ password: 0 });
       res.status(200).json(users);
     } else {
       const users = await UserModel.find(
