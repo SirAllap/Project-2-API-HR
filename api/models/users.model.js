@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now(), // Get a timestamp :)
+    default: Date.now(),
   },
   experience: {
     type: mongoose.Schema.Types.ObjectId,
