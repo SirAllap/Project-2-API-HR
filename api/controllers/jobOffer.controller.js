@@ -50,7 +50,7 @@ async function getAllJobOffers(req, res) {
         description: 0,
         category: 0,
       })
-        .populate("skills", "skills")
+        .populate({path: "skills", select: {"skills":1, "__v":0}})
         .populate("languages", "language")
         .populate("author", "name surname role");
       return res.status(200).json(jodOffers);
