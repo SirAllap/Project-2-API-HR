@@ -19,6 +19,7 @@ async function getUserProfile(req, res) {
       password: 0,
       role: 0,
       createdAt: 0,
+      skills: 0,
       __v: 0,
     })
       .populate({
@@ -33,7 +34,23 @@ async function getUserProfile(req, res) {
       .populate({
         path: "experience",
         model: "experience",
-        select: { userCand: 0, __v: 0 },
+        select: { userCand: 0 },
+        populate: {
+          path: "skills",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        populate: {
+          path: "languages.language",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
         populate: {
           path: "nationality",
           select: { __v: 0 },
@@ -55,7 +72,7 @@ async function updateUserProfile(req, res) {
         runValidator: true,
       }
     );
-    res.status(200).json(user);
+    res.status(200).json("Changes has been successfully saved");
   } catch (error) {
     res.status(500).send(`Error updating user profile: ${error}`);
   }
@@ -96,7 +113,7 @@ async function updateExperience(req, res) {
       }
     ).populate("skills");
     experience.save();
-    res.status(200).json(experience);
+    res.status(200).json("Experience has been updated successfully");
   } catch (error) {
     res.status(500).send(`Error updating experience to your profile: ${error}`);
   }
@@ -109,7 +126,7 @@ async function deleteExperience(req, res) {
     );
     experience.experience.remove(req.params.expId);
     experience.save();
-    res.status(200).json(experience.experience);
+    res.status(200).json("Experience has been successfully deleted");
   } catch (error) {
     res.status(500).send(`Error deleting experience to your profile: ${error}`);
   }

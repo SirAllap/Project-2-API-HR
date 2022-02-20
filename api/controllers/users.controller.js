@@ -22,8 +22,11 @@ async function createUser(req, res) {
 
 async function getAllUsers(req, res) {
   try {
-    if (res.locals.user.role === "admin") {
-      const users = await UserModel.find(req.query);
+    if (
+      res.locals.user.role === "admin" ||
+      res.locals.user.role === "manager"
+    ) {
+      const users = await UserModel.find(req.query,{ password: 0 });
       res.status(200).json(users);
     } else {
       const users = await UserModel.find(
@@ -31,14 +34,14 @@ async function getAllUsers(req, res) {
           role: "candidate",
         },
         { password: 0 }
-      ).populate({ 
+      ).populate({
         path: "requisition",
-        select: {"candidate":0, "__v":0},
+        select: { candidate: 0, __v: 0 },
         populate: {
           path: "jobPost",
           model: "jobOffer",
-          select: {"title": 1}
-        }
+          select: { title: 1 },
+        },
       });
       res.status(200).json(users);
     }
@@ -50,16 +53,40 @@ async function getAllUsers(req, res) {
 async function getOneUser(req, res) {
   try {
     const user = await UserModel.findById(req.params.userId, { password: 0 })
-    .populate({
-      path: "requisition",
-      select: { candidate: 0, __v: 0 },
-      populate: {
-        path: "jobPost",
-        model: "jobOffer",
-        select: { title: 1}
-      },
-    })
-      .populate("experience");
+      .populate({
+        path: "requisition",
+        select: { candidate: 0, __v: 0 },
+        populate: {
+          path: "jobPost",
+          model: "jobOffer",
+          select: { title: 1 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        select: { userCand: 0 },
+        populate: {
+          path: "skills",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        populate: {
+          path: "languages.language",
+          select: { __v: 0, createdAt: 0 },
+        },
+      })
+      .populate({
+        path: "experience",
+        model: "experience",
+        populate: {
+          path: "nationality",
+          select: { __v: 0 },
+        },
+      });
     if (
       user.role !== "candidate" &&
       (res.locals.user.role === "manager" ||
@@ -84,7 +111,7 @@ async function updateUser(req, res) {
         runValidator: true,
       }
     );
-    res.status(200).json(user);
+    res.status(200).json("Your changes were successfully saved");
   } catch (error) {
     res.status(500).send(`Error finding user: ${error}`);
   }

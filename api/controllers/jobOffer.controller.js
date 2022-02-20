@@ -96,7 +96,7 @@ async function getOneJobOffer(req, res) {
             },
           },
         });
-      return res.status(200).json({ jobOffer });
+      return res.status(200).json(jobOffer);
     }
   } catch (error) {
     res.status(500).send(`Error obtaining job offer: ${error}`);
